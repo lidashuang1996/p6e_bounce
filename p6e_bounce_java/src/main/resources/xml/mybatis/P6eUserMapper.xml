@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.p6e.bounce.mapper.P6eUserMapper">
+
+    <select id="select" parameterType="com.p6e.bounce.model.db.P6eUserDb"
+            resultType="com.p6e.bounce.model.db.P6eUserDb">
+        SELECT
+            `pui`.`id` AS `id`,
+            `pua`.`account` AS `account`,
+            `pua`.`status` AS `status`,
+            `pua`.`group` AS `group`,
+            `pui`.`alias` AS `alias`,
+            `pui`.`avatar` AS `avatar`,
+            `pui`.`name` AS `name`,
+            `pui`.`sex` AS `sex`,
+            `pui`.`birthday` AS `birthday`,
+            `pui`.`create_date` AS `createDate`,
+            `pui`.`update_date` AS `updateDate`,
+            `pui`.`operate` AS `operate`
+        FROM
+            `p6e_user_info` AS `pui`
+            LEFT JOIN `p6e_user_auth` AS `pua` ON `pui`.`id` = `pua`.`id`
+        WHERE
+            `pua`.`account` = #{account}
+            AND `pua`.`password` = #{password}
+    </select>
+</mapper>

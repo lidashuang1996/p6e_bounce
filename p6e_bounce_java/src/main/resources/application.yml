@@ -1,0 +1,37 @@
+server:
+  port: 9000
+
+p6e:
+  file:
+    root: E:\test
+
+spring:
+  application:
+    name: P6E_BOUNCE
+  datasource:
+    url: jdbc:mysql://119.23.25.159:3306/bounce?autoReconnect=true&useSSL=false&characterEncoding=UTF-8
+    username: root
+    password: Root1234!@#$
+    driver-class-name: com.mysql.cj.jdbc.Driver
+  redis:
+    database: 13
+    host: 119.23.25.159
+    port: 6379
+    password: lidashuang
+    timeout: 10000
+    jedis:
+      pool:
+        max-active: 8
+        max-wait: -1
+        max-idle: 8
+        min-idle: 0
+
+# mybatis 的配置
+mybatis:
+  config-location: classpath:./xml/mybatis-config.xml
+  mapper-locations: classpath:./xml/mybatis/*.xml
+
+# 日志
+logging:
+  level:
+    com.p6e.bounce.mapper: debug
