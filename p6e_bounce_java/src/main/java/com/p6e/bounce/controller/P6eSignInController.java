@@ -20,6 +20,10 @@ public class P6eSignInController {
     @Autowired
     private P6eSignInService p6eSignInService;
 
+    /**
+     * 默认登录的接口
+     * @return 通用返回类型
+     */
     @RequestMapping("/")
     public P6eResultModel def(@RequestBody P6eSignInParamVo param) {
         try {
@@ -34,7 +38,7 @@ public class P6eSignInController {
             }
         } catch (Exception e) {
             e.printStackTrace();
-            return P6eResultModel.build(500, e.getMessage());
+            return P6eResultModel.build(P6eResultConfig.ERROR_SERVICE_INSIDE, e.getMessage());
         }
     }
 

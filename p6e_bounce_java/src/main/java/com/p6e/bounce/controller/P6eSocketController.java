@@ -2,9 +2,9 @@ package com.p6e.bounce.controller;
 
 import com.p6e.bounce.model.P6eResultConfig;
 import com.p6e.bounce.model.P6eResultModel;
-import com.p6e.bounce.model.dto.P6eRoomParamDto;
+import com.p6e.bounce.model.dto.P6eSocketParamDto;
 import com.p6e.bounce.model.vo.P6eRoomParamVo;
-import com.p6e.bounce.service.P6eRoomService;
+import com.p6e.bounce.service.P6eSocketService;
 import com.p6e.bounce.utils.CopyUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.*;
 public class P6eSocketController {
 
     @Autowired
-    private P6eRoomService p6eRoomService;
+    private P6eSocketService p6eSocketService;
 
     @RequestMapping(value = "/", method = {RequestMethod.POST, RequestMethod.GET})
     public P6eResultModel def() {
@@ -24,7 +24,7 @@ public class P6eSocketController {
     @RequestMapping(value = "/list", method = {RequestMethod.POST, RequestMethod.GET})
     public P6eResultModel list() {
         try {
-            return P6eResultModel.build(P6eResultConfig.SUCCESS_ROOM_LIST, p6eRoomService.list());
+            return P6eResultModel.build(P6eResultConfig.SUCCESS_ROOM_LIST, p6eSocketService.list());
         } catch (Exception e) {
             e.printStackTrace();
             return P6eResultModel.build(500, e.getMessage());
@@ -35,7 +35,7 @@ public class P6eSocketController {
     public P6eResultModel create(@RequestBody P6eRoomParamVo param) {
         try {
             return P6eResultModel.build(P6eResultConfig.SUCCESS_ROOM_CREAETE,
-                    p6eRoomService.create(CopyUtil.run(param, P6eRoomParamDto.class)));
+                    p6eSocketService.create(CopyUtil.run(param, P6eSocketParamDto.class)));
         } catch (Exception e) {
             e.printStackTrace();
             return P6eResultModel.build(500, e.getMessage());
@@ -46,7 +46,7 @@ public class P6eSocketController {
     public P6eResultModel remove(@RequestBody P6eRoomParamVo param) {
         try {
             return P6eResultModel.build(P6eResultConfig.SUCCESS_ROOM_REMOVE,
-                    p6eRoomService.remove(CopyUtil.run(param, P6eRoomParamDto.class)));
+                    p6eSocketService.remove(CopyUtil.run(param, P6eSocketParamDto.class)));
         } catch (Exception e) {
             e.printStackTrace();
             return P6eResultModel.build(500, e.getMessage());

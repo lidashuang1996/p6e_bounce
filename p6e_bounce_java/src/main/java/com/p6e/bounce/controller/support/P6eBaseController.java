@@ -31,7 +31,7 @@ public class P6eBaseController {
     /**
      * 获取IP的方法
      */
-    protected static String obtainIp() {
+    public static String obtainIp() {
         HttpServletRequest request = getRequest();
         String ip = request.getHeader("x-forwarded-for");
         if (ip != null && ip.length() != 0 && !"unknown".equalsIgnoreCase(ip)) {

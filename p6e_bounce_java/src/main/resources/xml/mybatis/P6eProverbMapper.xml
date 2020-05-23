@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.p6e.bounce.mapper.P6eProverbMapper">
+
+    <select id="count" resultType="int">
+        SELECT
+            COUNT(`id`) AS `count`
+        FROM
+            `p6e_proverb`
+    </select>
+
+    <insert id="create" parameterType="com.p6e.bounce.model.db.P6eProverbDb"
+            keyColumn="id"
+            keyProperty="id"
+            useGeneratedKeys="true">
+        INSERT INTO `p6e_proverb` ( `author`, `content` )
+        VALUE
+            ( #{author}, #{content} );
+    </insert>
+
+    <select id="select" parameterType="com.p6e.bounce.model.db.P6eProverbDb"
+            resultType="com.p6e.bounce.model.db.P6eProverbDb">
+        SELECT
+            `id`,
+            `author`,
+            `content`,
+            `date`
+        FROM
+            `p6e_proverb`
+        <if test="id != null">
+            WHERE
+              `id` = #{id}
+        </if>
+    </select>
+
+</mapper>

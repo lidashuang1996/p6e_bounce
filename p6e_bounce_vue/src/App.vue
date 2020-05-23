@@ -2,8 +2,8 @@
   <div id="app">
     <!-- v-app 是 Vuetify 里面最基础的盒子 -->
     <v-app>
-      <home></home>
-      <!--<sign-in></sign-in>-->
+      <!--<home></home>-->
+      <sign-in></sign-in>
     </v-app>
   </div>
 </template>

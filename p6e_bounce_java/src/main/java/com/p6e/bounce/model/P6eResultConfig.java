@@ -26,6 +26,20 @@ public class P6eResultConfig {
     public static String SUCCESS_ROOM_CREAETE = "200-SUCCESS_ROOM_CREAETE";
     public static String SUCCESS_ROOM_REMOVE = "200-SUCCESS_ROOM_REMOVE";
 
+    public static String SUCCESS_SOCKET_LIST = "200-SUCCESS_SOCKET_LIST";
+    public static String SUCCESS_SOCKET_CREAETE = "200-SUCCESS_SOCKET_CREAETE";
+    public static String SUCCESS_SOCKET_REMOVE = "200-SUCCESS_SOCKET_REMOVE";
+
+    /** 谚语成功 */
+    public static String SUCCESS_PROVERB = "200-SUCCESS_PROVERB";
+
     public static String SUCCESS_FILE_ROOT = "200-SUCCESS_FILE_ROOT";
     public static String SUCCESS_FILE_PATH = "200-SUCCESS_FILE_PATH";
+
+    public static String SUCCESS_SIGN_OUT = "200-SUCCESS_SIGN_OUT";
+    public static String SUCCESS_SIGN_REFRESH = "200-SUCCESS_SIGN_REFRESH";
+    public static String ERROR_SIGN_REFRESH_NO_EXISTENT = "400-ERROR_SIGN_REFRESH_NO_EXISTENT";
+
+    /** 服务器内部出现异常 */
+    public static String ERROR_SERVICE_INSIDE = "500-ERROR_SERVICE_INSIDE";
 }

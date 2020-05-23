@@ -1,5 +1,6 @@
 package com.p6e.bounce.interceptor;
 
+import com.p6e.bounce.controller.support.P6eBaseController;
 import com.p6e.bounce.model.P6eResultModel;
 import com.p6e.bounce.model.base.P6eBaseParamVo;
 import com.p6e.bounce.utils.GsonUtil;
@@ -31,6 +32,7 @@ public class P6eHttpLogInterceptor {
         private String path;
         private Object body;
         private Object result;
+        private String ip;
         private String startDateTime;
         private String endDateTime;
 
@@ -74,6 +76,7 @@ public class P6eHttpLogInterceptor {
         httpLogModel = new HttpLogModel();
         httpLogModel.url = getUrl();
         httpLogModel.path = getPath(jp);
+        httpLogModel.ip = P6eBaseController.obtainIp();
         httpLogModel.startDateTime = LocalDateTime.now().format(dateTimeFormatter);
         Object[] jpArgs = jp.getArgs();
         for (Object jpArg : jpArgs) {
