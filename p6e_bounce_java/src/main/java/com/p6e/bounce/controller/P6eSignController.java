@@ -19,8 +19,6 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/sign")
 public class P6eSignController extends P6eBaseController {
 
-    private static final Logger logger = LoggerFactory.getLogger(P6eSignController.class);
-
     @Autowired
     private P6eSignService p6eSignService;
 

@@ -6,9 +6,9 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.web.servlet.ServletComponentScan;
 
+@MapperScan("com.p6e.bounce.mapper")
 @ServletComponentScan
 @SpringBootApplication
-@MapperScan("com.p6e.bounce.mapper")
 public class BounceApplication {
 
     public static void main(String[] args) {

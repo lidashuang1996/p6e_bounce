@@ -14,4 +14,5 @@ public interface P6eUserService {
 
     public P6eUserResultDto update(P6eUserParamDto param);
 
+    public String upload(String file);
 }

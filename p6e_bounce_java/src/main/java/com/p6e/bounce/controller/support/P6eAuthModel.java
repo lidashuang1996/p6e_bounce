@@ -1,9 +1,11 @@
 package com.p6e.bounce.controller.support;
 
+import java.io.Serializable;
+
 /**
  * 用户认证后的信息的模型
  */
-public class P6eAuthModel {
+public class P6eAuthModel implements Serializable {
     private Integer id;
     private String token;
     private String refreshToken;

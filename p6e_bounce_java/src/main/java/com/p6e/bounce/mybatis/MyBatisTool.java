@@ -7,7 +7,7 @@ import java.nio.charset.StandardCharsets;
 /**
  * MyBatis 密码加密处理类
  */
-public final class MyBatisPasswordHandle {
+public final class MyBatisTool {
 
     public static String encryption(String pwd) {
         String md5Pwd = DigestUtils.md5DigestAsHex(pwd.getBytes(StandardCharsets.UTF_8));

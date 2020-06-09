@@ -18,21 +18,25 @@ export class Cache {
       console.log(result);
       if (result.code === 200) {
         client = result.data.id;
-        http.initClient(client);
         window.localStorage.setItem(this.CLIENT_NAME, client);
+        http.initClient(client);
       }
     }
     // let bool = false;
-    // const user = window.localStorage.getItem(this.USER_NAME);
+    const user = window.localStorage.getItem(this.USER_NAME);
     // if (user !== undefined && user !== null) bool = true;
-    // if (self !== undefined && self != null) this.self = self;
-    // if (this.self !== undefined && this.self != null) {
-    // }
+    if (self !== undefined && self != null) this.self = self;
+    if (user !== undefined && user !== null && user !== '') {
+      http.initAuth(JSON.parse(user).token);
+      if (this.self !== undefined && this.self !== null) {
+        this.self.$store.state.globalStatus = 1;
+      }
+    }
     return this;
   }
 
   // 设置用户信息
-  public static setUser (value: HttpLoginDataResult) {
+  public static setUser (value: any) {
     window.localStorage.setItem(this.USER_NAME, JSON.stringify(value));
     return this;
   }

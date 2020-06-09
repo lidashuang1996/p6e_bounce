@@ -1,5 +1,6 @@
 package com.p6e.bounce.controller;
 
+import com.p6e.bounce.controller.support.P6eBaseController;
 import com.p6e.bounce.model.P6eResultConfig;
 import com.p6e.bounce.model.P6eResultModel;
 import com.p6e.bounce.model.dto.P6eSignInParamDto;
@@ -13,10 +14,16 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+/**
+ * 登录的接口
+ */
 @RestController
 @RequestMapping("/sign/in")
-public class P6eSignInController {
+public class P6eSignInController extends P6eBaseController {
 
+    /**
+     * 注入登录的服务对象
+     */
     @Autowired
     private P6eSignInService p6eSignInService;
 
@@ -37,7 +44,7 @@ public class P6eSignInController {
                         P6eResultConfig.SUCCESS_SIGN_IN_DEF, CopyUtil.run(result, P6eSignInResultVo.class));
             }
         } catch (Exception e) {
-            e.printStackTrace();
+            logger.info(e.getMessage());
             return P6eResultModel.build(P6eResultConfig.ERROR_SERVICE_INSIDE, e.getMessage());
         }
     }

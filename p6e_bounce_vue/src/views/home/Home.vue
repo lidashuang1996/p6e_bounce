@@ -14,13 +14,18 @@
         <router-view></router-view>
       </v-container>
     </v-content>
+    <!-- 弹出窗 -->
+    <div>
+      <dialog-component></dialog-component>
+    </div>
   </div>
 </template>
 <script lang="ts">
 import HomeHead from './HomeHead.vue';
 import { Component, Vue } from 'vue-property-decorator';
+import DialogComponent from '../../components/DialogComponent.vue';
 @Component({
-  components: { HomeHead }
+  components: { DialogComponent, HomeHead }
 })
 export default class Home extends Vue {
   protected app = {

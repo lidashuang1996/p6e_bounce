@@ -10,7 +10,7 @@ import javax.servlet.http.HttpServletResponse;
 
 public class P6eBaseController {
 
-    private static final Logger logger = LoggerFactory.getLogger(P6eBaseController.class);
+    protected static final Logger logger = LoggerFactory.getLogger(P6eBaseController.class);
 
     /**
      * 获取基础的请求与的对象 ServletRequestAttributes

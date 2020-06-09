@@ -2,8 +2,16 @@ server:
   port: 9000
 
 p6e:
+  source:
+    baseUrl: http://127.0.0.1:7510/controller
   file:
     root: E:\test
+    avatar: E:\avatar
+
+# mybatis 的配置
+mybatis:
+  config-location: classpath:./xml/mybatis-config.xml
+  mapper-locations: classpath:./xml/mybatis/*.xml
 
 spring:
   application:
@@ -25,11 +33,6 @@ spring:
         max-wait: -1
         max-idle: 8
         min-idle: 0
-
-# mybatis 的配置
-mybatis:
-  config-location: classpath:./xml/mybatis-config.xml
-  mapper-locations: classpath:./xml/mybatis/*.xml
 
 # 日志
 logging:

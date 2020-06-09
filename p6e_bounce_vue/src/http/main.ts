@@ -52,9 +52,13 @@ export default class Http {
   /**
    * API 登录接口
    */
-  public static apiLogin (data: HttpLoginParam): Promise<HttpLoginResult> {
-    return this.delayRequest<HttpLoginResult>(
-      this.$http.post<HttpLoginResult>(this.URL + '/sign/in', data), 3000);
+  public static async apiLogin (data: HttpLoginParam): Promise<HttpLoginResult> {
+    try {
+      return await this.delayRequest<HttpLoginResult>(
+        this.$http.post<HttpLoginResult>(this.URL + '/sign/in/', data), 3000);
+    } catch (e) {
+      return { code: 500, message: e.toString() };
+    }
   }
 
   public static apiClient (): Promise<HttpClientResult> {
@@ -63,6 +67,39 @@ export default class Http {
 
   public static apiVerificationCodeFirst (): Promise<any> {
     return this.$http.get<any>(this.URL + '/geetest/first?_=' + new Date().getTime());
+  }
+
+  /**
+   * 获取谚语的接口
+   */
+  public static async apiProverb (): Promise<HttpProverbResult> {
+    try {
+      return this.$http.get<HttpProverbResult>(this.URL + '/proverb/');
+    } catch (e) {
+      return { code: 500, message: e.toString() };
+    }
+  }
+
+  /**
+   * 获取用户列表数据的方法
+   */
+  public static async apiUserList (data: HttpUserListParam): Promise<HttpUserListResult> {
+    try {
+      return this.$http.post<HttpUserListResult>(this.URL + '/user/list', data);
+    } catch (e) {
+      return { code: 500, message: e.toString() };
+    }
+  }
+
+  /**
+   * 删除用户数据的方法
+   */
+  public static async apiDeleteUser (data: HttpDeleteUserParam): Promise<HttpDeleteUserResult> {
+    try {
+      return this.$http.post<HttpDeleteUserResult>(this.URL + '/user/delete', data);
+    } catch (e) {
+      return { code: 500, message: e.toString() };
+    }
   }
 
   public static apiVerificationCodeSecond (data: any) {

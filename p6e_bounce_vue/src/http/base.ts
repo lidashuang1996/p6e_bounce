@@ -40,9 +40,14 @@ export default class Base implements BaseHttp {
 
   public post<T = any> (url: string, data: any = {}, config?: AxiosRequestConfig): Promise<T> {
     return new Promise<T>((resolve, reject) => {
-      this.request.post<T>(url, data, config)
-        .then((res) => { if (res.data !== undefined && res.data !== null) resolve(res.data); })
-        .catch((e) => { console.error(e); reject(e); });
+      try {
+        this.request.post<T>(url, data, config)
+          .then((res) => { if (res.data !== undefined && res.data !== null) resolve(res.data); })
+          .catch((e) => { console.error(e); reject(e); });
+      } catch (e) {
+        console.error(e);
+        reject(e);
+      }
     });
   }
 

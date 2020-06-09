@@ -23,7 +23,127 @@
             `p6e_user_info` AS `pui`
             LEFT JOIN `p6e_user_auth` AS `pua` ON `pui`.`id` = `pua`.`id`
         WHERE
-            `pua`.`account` = #{account}
-            AND `pua`.`password` = #{password}
+            <if test="DB.id == null">
+                `pua`.`account` = #{DB.account}
+                AND `pua`.`password` = #{DB.password};
+            </if>
+            <if test="DB.id != null">
+                `pua`.`id` = #{DB.id};
+            </if>
+    </select>
+
+    <select id="selectList" parameterType="com.p6e.bounce.model.db.P6eUserDb"
+            resultType="com.p6e.bounce.model.db.P6eUserDb">
+        SELECT
+            `pui`.`id` AS `id`,
+            `pua`.`group` AS `group`,
+            `pua`.`status` AS `status`,
+            `pua`.`account` AS `account`,
+            `pui`.`alias` AS `alias`,
+            `pui`.`avatar` AS `avatar`,
+            `pui`.`name` AS `name`,
+            `pui`.`sex` AS `sex`,
+            `pui`.`birthday` AS `birthday`,
+            `pui`.`create_date` AS `createDate`,
+            `pui`.`update_date` AS `updateDate`,
+            `pui`.`operate` AS `operate`
+        FROM
+            `p6e_user_info` AS `pui`
+            LEFT JOIN `p6e_user_auth` AS `pua` ON `pui`.`id` = `pua`.`id`
+        <trim prefix="WHERE" prefixOverrides="OR| AND">
+            <if test="DB.search != null">
+                (
+                `pua`.`account` LIKE CONCAT(#{DB.search}, '%')
+                OR
+                `pui`.`alias` LIKE CONCAT(#{DB.search}, '%')
+                OR
+                `pui`.`name` LIKE CONCAT(#{DB.search}, '%')
+                )
+            </if>
+            <if test="DB.group != null">
+                AND `pua`.`group` = #{DB.group}
+            </if>
+            <if test="DB.status != null">
+                AND `pua`.`status` = #{DB.status}
+            </if>
+        </trim>
+        ORDER BY `pui`.`id`
+        LIMIT #{DB.page}, #{DB.size};
+    </select>
+
+    <insert id="createInfo" parameterType="com.p6e.bounce.model.db.P6eUserDb"
+            useGeneratedKeys="true" keyColumn="id" keyProperty="id">
+        INSERT INTO `p6e_user_info` ( `alias`, `avatar`, `name`, `sex`, `birthday` )
+        VALUE ( #{alias}, #{avatar}, #{name}, #{sex}, #{birthday} );
+    </insert>
+
+    <insert id="createAuth" parameterType="com.p6e.bounce.model.db.P6eUserDb">
+        INSERT INTO `p6e_user_auth` (`id`, `account`, `password`, `status`, `group` )
+        VALUE ( #{id}, #{account}, #{password}, #{status}, #{group} );
+    </insert>
+
+    <delete id="deleteInfo" parameterType="com.p6e.bounce.model.db.P6eUserDb">
+        DELETE
+        FROM
+            `p6e_user_info`
+        WHERE
+            `id` = #{DB.id};
+    </delete>
+
+    <delete id="deleteAuth" parameterType="com.p6e.bounce.model.db.P6eUserDb">
+        DELETE
+        FROM
+            `p6e_user_auth`
+        WHERE
+            `id` = #{DB.id};
+    </delete>
+
+    <update id="updateInfo" parameterType="com.p6e.bounce.model.db.P6eUserDb">
+        UPDATE `p6e_user_info`
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="alias != null">`alias` = #{alias},</if>
+            <if test="avatar != null">`avatar` = #{avatar},</if>
+            <if test="name != null">`name` = #{name},</if>
+            <if test="sex != null">`sex` = #{sex},</if>
+            <if test="birthday != null">`birthday` = #{birthday},</if>
+        </trim>
+        WHERE
+            `id` = #{id};
+    </update>
+
+    <update id="updateAuth" parameterType="com.p6e.bounce.model.db.P6eUserDb">
+        UPDATE `p6e_user_auth`
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="password != null">`password` = #{password},</if>
+            <if test="status != null">`status` = #{status},</if>
+            <if test="group != null">`group` = #{group},</if>
+        </trim>
+        WHERE
+            `id` = #{id};
+    </update>
+
+    <select id="count" parameterType="com.p6e.bounce.model.db.P6eUserDb" resultType="int">
+        SELECT
+            COUNT(`pui`.`id`) AS `count`
+        FROM
+            `p6e_user_info` AS `pui`
+            LEFT JOIN `p6e_user_auth` AS `pua` ON `pui`.`id` = `pua`.`id`
+        <trim prefix="WHERE" prefixOverrides="OR| AND">
+            <if test="DB.search != null">
+                (
+                `pua`.`account` LIKE CONCAT(#{DB.search}, '%')
+                OR
+                `pui`.`alias` LIKE CONCAT(#{DB.search}, '%')
+                OR
+                `pui`.`name` LIKE CONCAT(#{DB.search}, '%')
+                )
+            </if>
+            <if test="DB.group != null">
+                AND `pua`.`group` = #{DB.group}
+            </if>
+            <if test="DB.status != null">
+                AND `pua`.`status` = #{DB.status}
+            </if>
+        </trim>;
     </select>
 </mapper>

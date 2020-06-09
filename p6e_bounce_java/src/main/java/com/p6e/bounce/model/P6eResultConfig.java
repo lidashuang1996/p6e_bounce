@@ -5,6 +5,9 @@ public class P6eResultConfig {
     public static String ERROR_PARAM_EXCEPTION = "400-ERROR_PARAM_EXCEPTION";
     /** COOKIES 异常 */
     public static String ERROR_COOKIES_EXCEPTION = "400-ERROR_COOKIES_EXCEPTION";
+    /** CLIENT ID 获取成功 */
+    public static String SUCCESS_CLIENT_GENERATE = "200-SUCCESS_CLIENT_GENERATE";
+    public static String ERROR_CLIENT_GENERATE = "500-ERROR_CLIENT_GENERATE";
     /** 账号或者密码错误 */
     public static String ERROR_ACCOUNT_OR_PASSWORD = "400-ERROR_ACCOUNT_OR_PASSWORD";
     /** 文件上传不为文件错误 */
@@ -32,6 +35,7 @@ public class P6eResultConfig {
 
     /** 谚语成功 */
     public static String SUCCESS_PROVERB = "200-SUCCESS_PROVERB";
+    public static String ERROR_PROVERB_NO_EXISTENT = "400-ERROR_PROVERB_NO_EXISTENT";
 
     public static String SUCCESS_FILE_ROOT = "200-SUCCESS_FILE_ROOT";
     public static String SUCCESS_FILE_PATH = "200-SUCCESS_FILE_PATH";

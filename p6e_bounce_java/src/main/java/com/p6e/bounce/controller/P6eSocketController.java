@@ -1,5 +1,6 @@
 package com.p6e.bounce.controller;
 
+import com.p6e.bounce.controller.support.P6eBaseController;
 import com.p6e.bounce.model.P6eResultConfig;
 import com.p6e.bounce.model.P6eResultModel;
 import com.p6e.bounce.model.dto.P6eSocketParamDto;
@@ -11,7 +12,7 @@ import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/socket")
-public class P6eSocketController {
+public class P6eSocketController extends P6eBaseController {
 
     @Autowired
     private P6eSocketService p6eSocketService;
@@ -26,8 +27,8 @@ public class P6eSocketController {
         try {
             return P6eResultModel.build(P6eResultConfig.SUCCESS_ROOM_LIST, p6eSocketService.list());
         } catch (Exception e) {
-            e.printStackTrace();
-            return P6eResultModel.build(500, e.getMessage());
+            logger.error(e.getMessage());
+            return P6eResultModel.build(P6eResultConfig.ERROR_SERVICE_INSIDE, e.getMessage());
         }
     }
 
@@ -37,8 +38,8 @@ public class P6eSocketController {
             return P6eResultModel.build(P6eResultConfig.SUCCESS_ROOM_CREAETE,
                     p6eSocketService.create(CopyUtil.run(param, P6eSocketParamDto.class)));
         } catch (Exception e) {
-            e.printStackTrace();
-            return P6eResultModel.build(500, e.getMessage());
+            logger.error(e.getMessage());
+            return P6eResultModel.build(P6eResultConfig.ERROR_SERVICE_INSIDE, e.getMessage());
         }
     }
 
@@ -48,8 +49,8 @@ public class P6eSocketController {
             return P6eResultModel.build(P6eResultConfig.SUCCESS_ROOM_REMOVE,
                     p6eSocketService.remove(CopyUtil.run(param, P6eSocketParamDto.class)));
         } catch (Exception e) {
-            e.printStackTrace();
-            return P6eResultModel.build(500, e.getMessage());
+            logger.error(e.getMessage());
+            return P6eResultModel.build(P6eResultConfig.ERROR_SERVICE_INSIDE, e.getMessage());
         }
     }
 

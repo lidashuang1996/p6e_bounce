@@ -17,7 +17,7 @@
             useGeneratedKeys="true">
         INSERT INTO `p6e_proverb` ( `author`, `content` )
         VALUE
-            ( #{author}, #{content} );
+            ( #{DB.author}, #{DB.content} );
     </insert>
 
     <select id="select" parameterType="com.p6e.bounce.model.db.P6eProverbDb"
@@ -29,9 +29,9 @@
             `date`
         FROM
             `p6e_proverb`
-        <if test="id != null">
+        <if test="DB.id != null">
             WHERE
-              `id` = #{id}
+              `id` = #{DB.id}
         </if>
     </select>
 
