@@ -7,6 +7,8 @@ import java.util.List;
 
 /**
  * 数据库用户表的映射
+ * @author LiDaShuang
+ * @version 1.0
  */
 public interface P6eUserMapper {
 

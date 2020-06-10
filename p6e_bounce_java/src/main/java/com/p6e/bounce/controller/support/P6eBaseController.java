@@ -10,6 +10,7 @@ import javax.servlet.http.HttpServletResponse;
 
 public class P6eBaseController {
 
+    /** 创建全局 Controller 的日志对象 */
     protected static final Logger logger = LoggerFactory.getLogger(P6eBaseController.class);
 
     /**

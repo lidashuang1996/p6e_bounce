@@ -4,9 +4,15 @@ import com.google.gson.Gson;
 
 import java.lang.reflect.Type;
 
+/**
+ * 对 GEON 的封装
+ * @author LiDaShuang
+ * @version 1.0
+ */
 public final class GsonUtil {
 
-    private static Gson gson = new Gson();
+    /** 工具类创建一个 GEON 对象 */
+    private static final Gson gson = new Gson();
 
     public static String toJson(Object o) {
         return gson.toJson(o);
@@ -19,6 +25,5 @@ public final class GsonUtil {
     public static <T> T fromJson(String json, Type typeOfT) {
         return gson.fromJson(json, typeOfT);
     }
-
 
 }

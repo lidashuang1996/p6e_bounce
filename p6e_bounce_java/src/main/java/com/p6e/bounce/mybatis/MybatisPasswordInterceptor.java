@@ -13,6 +13,11 @@ import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 
+/**
+ * MyBatis 拦截器，对密码参数进行加密处理
+ * @author LiDaShuang
+ * @version 1.0
+ */
 @Intercepts(@Signature(type = Executor.class, method = "query",
         args = { MappedStatement.class, Object.class, RowBounds.class, ResultHandler.class }))
 public class MybatisPasswordInterceptor implements Interceptor {
@@ -22,6 +27,7 @@ public class MybatisPasswordInterceptor implements Interceptor {
         // 获取参数
         Object param = invocation.getArgs()[1];
         if (param instanceof HashMap) {
+            @SuppressWarnings("all") // 忽略提示
             HashMap hashMap = (HashMap) param;
             for (Object o : hashMap.keySet()) {
                 if (o != null && "DB".equals(String.valueOf(o))) execute(hashMap.get(o));
@@ -34,7 +40,6 @@ public class MybatisPasswordInterceptor implements Interceptor {
 
     private void execute(Object param) throws IllegalAccessException {
         if (param instanceof P6eBaseDb) {
-            System.out.println(GsonUtil.toJson(param));
             Class<?> paramClass = param.getClass();
             List<Field> fields = new ArrayList<>(Arrays.asList(paramClass.getDeclaredFields()));
             for (Field field : fields) {

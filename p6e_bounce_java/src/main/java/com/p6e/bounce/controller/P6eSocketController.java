@@ -10,6 +10,11 @@ import com.p6e.bounce.utils.CopyUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+/**
+ * 该类是 socket client 的操作接口
+ * @author LiDaShuang
+ * @version 1.0
+ */
 @RestController
 @RequestMapping("/socket")
 public class P6eSocketController extends P6eBaseController {
@@ -53,6 +58,5 @@ public class P6eSocketController extends P6eBaseController {
             return P6eResultModel.build(P6eResultConfig.ERROR_SERVICE_INSIDE, e.getMessage());
         }
     }
-
 
 }

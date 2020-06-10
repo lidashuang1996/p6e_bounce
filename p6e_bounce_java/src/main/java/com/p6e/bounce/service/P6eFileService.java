@@ -4,6 +4,11 @@ import com.p6e.bounce.model.P6eFileModel;
 
 import java.util.List;
 
+/**
+ * 文件操作
+ * @author LiDaShuang
+ * @version 1.0
+ */
 public interface P6eFileService {
 
     /**

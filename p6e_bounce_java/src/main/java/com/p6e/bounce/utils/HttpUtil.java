@@ -17,6 +17,8 @@ import java.util.Map;
 
 /**
  * HTTP 请求的工具包
+ * @author LiDaShuang
+ * @version 1.0
  */
 public final class HttpUtil {
 

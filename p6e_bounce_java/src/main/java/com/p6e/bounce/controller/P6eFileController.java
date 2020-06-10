@@ -1,6 +1,7 @@
 package com.p6e.bounce.controller;
 
 import com.p6e.bounce.config.P6eFileConfig;
+import com.p6e.bounce.controller.support.P6eBaseController;
 import com.p6e.bounce.model.P6eResultConfig;
 import com.p6e.bounce.model.P6eResultModel;
 import com.p6e.bounce.service.P6eFileService;
@@ -14,10 +15,7 @@ import java.io.File;
 
 @RestController
 @RequestMapping("/file")
-public class P6eFileController {
-
-    /** 注入日志系统 */
-    private static final Logger logger = LoggerFactory.getLogger(P6eFileController.class);
+public class P6eFileController extends P6eBaseController {
 
     @Autowired
     private P6eFileConfig p6eFileConfig;

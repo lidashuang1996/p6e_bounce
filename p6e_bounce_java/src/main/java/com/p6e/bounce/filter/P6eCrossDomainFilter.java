@@ -1,4 +1,4 @@
-package com.p6e.bounce.controller.filter;
+package com.p6e.bounce.filter;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -14,19 +14,25 @@ import java.util.Enumeration;
 import java.util.HashMap;
 import java.util.Map;
 
+/**
+ * 浏览器跨域处理过滤器
+ * @author LiDaShuang
+ * @version 1.0
+ */
 @WebFilter(filterName = "CrossDomainFilter", urlPatterns = {"*"})
-public class ClubCrossDomainFilter implements Filter {
+public class P6eCrossDomainFilter implements Filter {
 
     /**
      * 注入日志系统
      */
-    private static final Logger logger = LoggerFactory.getLogger(ClubCrossDomainFilter.class);
+    private static final Logger logger = LoggerFactory.getLogger(P6eCrossDomainFilter.class);
 
     /**
      * 自定义的 HttpServletRequestWrapper 用来添加自己定义的请求头
      */
     private static class MyHttpServletRequestWrapper extends HttpServletRequestWrapper {
-        private Map<String, String> myHeader = new HashMap<>();
+
+        private final Map<String, String> myHeader = new HashMap<>();
 
         MyHttpServletRequestWrapper(HttpServletRequest request) {
             super(request);
@@ -44,6 +50,15 @@ public class ClubCrossDomainFilter implements Filter {
             myHeader.put(name.toLowerCase(), value.toLowerCase());
         }
 
+        void setCrossDomain() {
+            myHeader.put("cross-domain", "existence");
+        }
+
+        boolean isCrossDomain() {
+            String crossDomainHeader = myHeader.get("cross-domain");
+            return "existence".equals(crossDomainHeader);
+        }
+
         @Override
         public String getHeader(String name) {
             return myHeader.get(name.toLowerCase());
@@ -57,7 +72,7 @@ public class ClubCrossDomainFilter implements Filter {
 
     @Override
     public void init(FilterConfig filterConfig) {
-        logger.info("Filter [ CrossDomainFilter ] " + "init complete ... ");
+        logger.info("Filter [ CrossDomainFilter ] init complete ... ");
     }
 
     @Override
@@ -78,11 +93,9 @@ public class ClubCrossDomainFilter implements Filter {
         }
 
         MyHttpServletRequestWrapper myHttpServletRequestWrapper = new MyHttpServletRequestWrapper(request);
-
-        // 判断是否跨域 ==> 根据自定义的规则
-        String crossDomainHeader = myHttpServletRequestWrapper.getHeader("Cross-Domain");
-        if (!"existence".equals(crossDomainHeader)) {
-            myHttpServletRequestWrapper.setHeader("Cross-Domain", "existence");
+        if (!myHttpServletRequestWrapper.isCrossDomain()) {
+            // 头部添加 Cross-Domain 为 existence 标记这个请求已经做了跨域处理
+            myHttpServletRequestWrapper.setCrossDomain();
             response.setHeader("Access-Control-Allow-Origin", origin);
             response.setHeader("Access-Control-Allow-Methods", "PUT, POST, GET, DELETE, OPTIONS");
             response.setHeader("Access-Control-Max-Age", "3600");
@@ -92,6 +105,7 @@ public class ClubCrossDomainFilter implements Filter {
                     + "User-Agent, X-File-Size, X-Requested-With, X-Requested-By, If-Modified-Since, "
                     + "X-File-Name, X-File-Type, Cache-Control, Origin, Client");
         }
+
         // 是否为 OPTIONS 方法
         String method = request.getMethod();
         if (method.toUpperCase().equals("OPTIONS")) response.setStatus(200);
@@ -100,7 +114,7 @@ public class ClubCrossDomainFilter implements Filter {
 
     @Override
     public void destroy() {
-        logger.info("Filter [ CrossDomainFilter ] " + "destroy complete ... ");
+        logger.info("Filter [ CrossDomainFilter ] destroy complete ... ");
     }
 
 }

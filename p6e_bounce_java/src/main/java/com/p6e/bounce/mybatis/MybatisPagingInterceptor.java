@@ -9,6 +9,13 @@ import org.apache.ibatis.session.RowBounds;
 
 import java.util.HashMap;
 
+/**
+ * MyBatis 拦截器
+ * 1. 处理默认参数
+ * 2. 设置查询的最大值
+ * @author LiDaShuang
+ * @version 1.0
+ */
 @Intercepts(@Signature(type = Executor.class, method = "query",
         args = { MappedStatement.class, Object.class, RowBounds.class, ResultHandler.class }))
 public class MybatisPagingInterceptor implements Interceptor {
@@ -18,6 +25,7 @@ public class MybatisPagingInterceptor implements Interceptor {
         // 获取参数
         Object param = invocation.getArgs()[1];
         if (param instanceof HashMap) {
+            @SuppressWarnings("all") // 忽略提示
             HashMap hashMap = (HashMap) param;
             for (Object o : hashMap.values()) execute(o);
             invocation.getArgs()[1] = hashMap;

@@ -3,6 +3,11 @@ package com.p6e.bounce.service;
 import com.p6e.bounce.model.dto.P6eSignInParamDto;
 import com.p6e.bounce.model.dto.P6eSignInResultDto;
 
+/**
+ * 登录操作
+ * @author LiDaShuang
+ * @version 1.0
+ */
 public interface P6eSignInService {
 
     /**

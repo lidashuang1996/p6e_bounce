@@ -1,8 +1,8 @@
 package com.p6e.bounce.model;
 
-import java.util.List;
+import java.io.Serializable;
 
-public class P6eFileModel {
+public class P6eFileModel implements Serializable {
     private String name;
     private String type;
     private long size;

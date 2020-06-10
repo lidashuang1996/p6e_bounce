@@ -4,6 +4,11 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.UUID;
 
+/**
+ * 常见的工具类
+ * @author LiDaShuang
+ * @version 1.0
+ */
 public final class CommonUtil {
 
     public static String generateUUID() {

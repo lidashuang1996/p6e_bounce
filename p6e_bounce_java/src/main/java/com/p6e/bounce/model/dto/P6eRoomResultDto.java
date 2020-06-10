@@ -8,6 +8,13 @@ public class P6eRoomResultDto extends P6eBaseResultDto implements Serializable {
 
     private String rid;
 
+    public P6eRoomResultDto() {
+    }
+
+    public P6eRoomResultDto(String rid) {
+        this.rid = rid;
+    }
+
     public String getRid() {
         return rid;
     }

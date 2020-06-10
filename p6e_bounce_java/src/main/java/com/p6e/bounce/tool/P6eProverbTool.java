@@ -16,6 +16,8 @@ import org.springframework.stereotype.Component;
 /**
  * 谚语 获取数据到数据库的工具类
  * 这里才用的是 jsonp 对数据进行爬取
+ * @author LiDaShuang
+ * @version 1.0
  */
 @Component
 public class P6eProverbTool {
